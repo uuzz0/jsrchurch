@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주성령교회 - 인내의 말씀을 지키는 교회</title>
+    <style>
+/* 실시간 날짜 디자인 */
+    .date-display {
+        color: #a68b80;
+        font-size: 0.95em;
+        margin-bottom: 10px;
+        font-style: italic;
+        letter-spacing: 0.5px;
+    }     
+   /* 1. 기본 배경과 폰트 설정 */
+        html {
+            scroll-behavior: smooth; /* 부드러운 화면 이동 */
+        }
+        body {
+            background-color: #fdfaf5; 
+            color: #5a4a42;
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            max-width: 100%; /* 화면보다 커지지 않게 */
+            height: auto;    /* 비율은 유지하게 */
+        }
+        /* 2. 헤더(로고 & 메뉴) 디자인 */
+        header {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .logo-area img {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+       /* 3. 메뉴 언더라인 애니메이션 */
+    nav a {
+        text-decoration: none;
+        color: #8c6a5e;
+        font-weight: bold;
+        font-size: 1.1em;
+        position: relative; /* 선이 붙을 기준점! */
+        padding-bottom: 5px; /* 글자와 선 사이의 간격 */
+        transition: color 0.3s;
+    }
+
+    /* 마우스를 올리기 전 선의 상태 (가로길이 0) */
+    nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0; /* 처음엔 선이 없어요 */
+        height: 2px; /* 선의 두께 */
+        background-color: #d9a78b; /* 선의 색상 (로고 포인트 컬러) */
+        transition: width 0.3s ease; /* 0.3초 동안 스르륵~ */
+    }
+
+    /* 마우스를 올렸을 때의 변화 */
+    nav a:hover {
+        color: #d9a78b; /* 글자색도 같이 변하게 */
+    }
+
+    nav a:hover::after {
+        width: 100%; /* 마우스를 올리면 선이 꽉 차게! */
+    }
+
+        /* 3. 메인 말씀 카드 - 전체 문장 버전 */
+        .bible-verse {
+            position: relative;
+            padding: 90px 40px;
+            margin: 40px auto;
+            max-width: 850px; 
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(140, 106, 94, 0.03); 
+        }
+
+        .bible-verse::before {
+            content: "PATIENCE & PROMISE";
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6em;
+            font-weight: 900;
+            color: #fdfaf5; 
+            z-index: 0;
+            white-space: nowrap;
+            letter-spacing: 12px;
+        }
+
+        .bible-verse-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .church-motto-label {
+            display: inline-block;
+            background-color: #f9f5f0;
+            color: #8c6a5e;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .bible-verse h2 {
+            color: #5a4a42;
+            font-size: 1.65em;
+            font-weight: bold;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .bible-verse p {
+            color: #a68b80;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .motto-footer {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid #f2e8df;
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        .motto-footer h3 {
+            color: #8c6a5e;
+            font-size: 1.2em;
+            font-weight: normal;
+            letter-spacing: 4px;
+        }
+
+        .worship-container {
+            padding: 80px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .worship-subtitle {
+            color: #a68b80;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .worship-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .worship-table th {
+            background-color: #f9f5f0;
+            color: #8c6a5e;
+            padding: 15px;
+            font-size: 1.1em;
+        }
+
+        .worship-table td {
+            padding: 15px;
+            border-bottom: 1px solid #fdfaf5;
+            color: #5a4a42;
+        }
+
+        .worship-table tr:hover {
+            background-color: #fff0f3; 
+            transition: background-color 0.3s;
+        }
+
+        #location {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .welcome-container-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff9f9;
+            padding: 50px 40px;
+            margin: 40px 20px;
+            border-radius: 40px 10px;
+            max-width: 850px;
+            border: 1px dashed #f2e8df;
+            gap: 40px;
+        }
+
+        .pastor-photo img {
+            width: 220px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .welcome-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .welcome-text h2 {
+            color: #8c6a5e;
+            font-size: 1.6em;
+            margin: 10px 0;
+        }
+
+        .welcome-text p {
+            color: #7a6a62;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+        }
+
+        .pastor-name {
+            font-size: 1.1em;
+            color: #5a4a42;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-container-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+            .welcome-text {
+                text-align: center;
+            }
+        }
+
+        .news-container {
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .news-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(140, 106, 94, 0.05);
+            border: 1px solid #f9f5f0;
+        }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .news-list li {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #5a4a42;
+        }
+
+        .flower-bullet {
+            margin-right: 10px;
+            color: #d9a78b;
+        }
+
+        .gallery-container {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .photo-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .photo-item {
+            width: 250px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+
+        footer {
+            width: 100%;
+            background-color: #f2e8df;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+            color: #8c6a5e;
+            font-size: 0.9em;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+            font-size: 0.8em;
+        }
+
+        /* 🌸 맨 위로 가기 버튼 디자인 - 스타일 태그 안으로 이동! */
+        #topBtn {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #ffffff;
+            color: #8c6a5e;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 25px;
+            box-shadow: 0 4px 15px rgba(140, 106, 94, 0.15);
+            transition: all 0.3s;
+        }
+
+        #topBtn:hover {
+            background-color: #fff0f3;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="logo.png" alt="주성령교회 로고">
+        </div>
+<div id="current-date" class="date-display"></div>
+        <nav>
+            <ul>
+                <li><a href="#intro">🌸 교회소개</a></li>
+                <li><a href="#worship">🌷 예배안내</a></li>
+                <li><a href="#news">🌿 교회소식</a></li>
+                <li><a href="#location">📍 오시는 길</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="intro">
+        <div class="welcome-container-flex">
+            <div class="pastor-photo">
+                <img src="pastor.jpg" alt="목사님 프로필 사진">
+            </div>
+            <div class="welcome-text">
+                <h2>주성령교회에 오신 당신을 환영합니다</h2>
+                <p>
+                    주성령교회는 하나님의 사랑 안에서 따뜻한 쉼과 회복이 있는 공동체입니다.<br>
+                    지친 일상 속에서 잠시 멈춰, 함께 하늘의 평안을 누리길 소망합니다.<br>
+                    처음 오신 분도, 오랫동안 함께하신 분도 모두 주님의 이름으로 축복합니다.
+                </p>
+                <p class="pastor-name"><strong>담임목사 이 상 돈 </strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-visual">
+        <div class="bible-verse">
+            <div class="bible-verse-content">
+                <span class="church-motto-label">2026 교회 표어</span>
+                <h2>
+                    "네가 나의 인내의 말씀을 지켰은즉 내가 또한 너를 지키어<br>
+                    시험의 때를 면하게 하리니 이는 장차 온 세상에 임하여<br>
+                    땅에 거하는 자들을 시험할 때라"
+                </h2>
+                <p>(요한계시록 3:10)</p>
+                <div class="motto-footer">
+                    <h3>주님만 바라보며 나아가는 주성령교회</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="worship">
+        <div class="worship-container">
+            <h2>🌷예배 안내🌷</h2>
+            <p class="worship-subtitle">"신령과 진정으로 드리는 예배에 여러분을 초대합니다."</p>
+            <table class="worship-table">
+                <thead>
+                    <tr><th>예배명</th><th>시간</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>주일 대예배</td><td>오전 11시</td></tr>
+                    <tr><td>주일 오후예배</td><td>오후 2시</td></tr>
+                    <tr><td>새벽 예배 (월~토)</td><td>오전 6시</td></tr>
+                    <tr><td>수요 예배</td><td>오후 8시</td></tr>
+                    <tr><td>금요 기도회</td><td>오후 9시</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="news">
+        <div class="news-container">
+            <h2>교회 소식</h2>
+            <div class="news-card">
+                <ul class="news-list">
+                    <li><span class="flower-bullet">🌿</span> <strong>새가족 성경 공부:</strong> 매주 주일 오후 1시, 소예배실</li>
+                    <li><span class="flower-bullet">🌿</span> <strong>봄맞이 대청소:</strong> 토요일 오전 10시</li>
+                    <li><span class="flower-bullet">🌿</span> <strong>성경 필사 캠페인:</strong> 요한복음 필사 진행 중</li>
+                    <li><span class="flower-bullet">🌿</span> <strong>금요 기도회 찬양팀 모집:</strong> 함께해요!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="gallery-container">
+            <h2>주성령 갤러리</h2>
+            <div class="photo-grid">
+                <div class="photo-item"><img src="cele2025.jpg" alt="사진 1"></div>
+                <div class="photo-item"><img src="gathering.jpg" alt="사진 2"></div>
+                <div class="photo-item"><img src="mission.jpg" alt="사진 3"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location">
+        <h3>⛪ 오시는 길</h3> 
+        <p>천안시 서북구 신당새터2길 18</p>
+        <p>전화: 041-555-0245</p>
+        <div class="map-area" style="margin-top: 20px;">
+            <img src="jsr_map.png" alt="약도" style="width: 100%; max-width: 600px; height: auto; border: 1px solid #f2e8df; border-radius: 15px;">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <p><strong>대한예수교 장로회(합동) 주성령교회</strong></p>
+            <p>주소: 천안시 서북구 신당새터2길 18 | 전화: 041-555-0245</p>
+            <p class="copyright">© 2026 주성령교회. All rights reserved. Designed by uzo.</p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="topBtn" title="맨 위로">🌸</button>
+
+    <script>
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            var topBtn = document.getElementById("topBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        }
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+// 실시간 날짜와 요일을 가져오는 마법
+    function displayToday() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1; // 월은 0부터 시작해서 1을 더해줘요
+        const date = now.getDate();
+        const dayList = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        const day = dayList[now.getDay()];
+
+        const dateString = `${year}년 ${month}월 ${date}일 ${day} 오늘도 평안한 하루 되세요 🕊️`;
+document.getElementById('current-date').innerText = dateString;
+    }
+
+    // 페이지가 켜지자마자 날짜를 보여줍니다
+    displayToday();
+    </script>
+</body>
+</html>
