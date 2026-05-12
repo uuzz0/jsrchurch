@@ -348,7 +348,30 @@
             opacity: 0.7;
             font-size: 0.8em;
         }
+/* 길찾기 버튼 스타일 */
+    .map-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: #8c6a5e;
+        border: 1px solid #8c6a5e;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9em;
+        transition: all 0.3s;
+    }
 
+    .map-btn:hover {
+        background-color: #8c6a5e;
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(140, 106, 94, 0.2);
+    }
+
+    .map-btn i {
+        margin-right: 5px;
+    }
         /* 🌸 맨 위로 가기 버튼 디자인 - 스타일 태그 안으로 이동! */
         #topBtn {
             display: none;
@@ -482,14 +505,19 @@
         </div>
     </section>
 
-    <section id="location">
-        <h3>⛪ 오시는 길</h3> 
-        <p>천안시 서북구 신당새터2길 18</p>
-        <p>전화: 041-555-0245</p>
-        <div class="map-area" style="margin-top: 20px;">
-            <img src="jsr_map.png" alt="약도" style="width: 100%; max-width: 600px; height: auto; border: 1px solid #f2e8df; border-radius: 15px;">
-        </div>
-    </section>
+   <section id="location">
+    <h3>⛪ 오시는 길</h3> 
+    <p>천안시 서북구 신당새터2길 18</p>
+    <p>전화: 041-555-0245</p>
+
+    <a href="https://map.naver.com/v5/search/천안시 서북구 신당새터2길 18" target="_blank" class="map-btn">
+        📍 네이버 지도에서 보기
+    </a>
+    
+    <div class="map-area" style="margin-top: 20px;">
+        <img src="jsr_map.png" alt="주성령교회 약도" style="width: 100%; max-width: 600px; height: auto; border: 1px solid #f2e8df; border-radius: 15px;">
+    </div>
+</section>
 
     <footer>
         <div class="footer-info">
