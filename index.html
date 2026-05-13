@@ -533,44 +533,55 @@ html, body {
         display: none; 
     }
     
- /* 🌸 3. 환영 인사 모바일: 사진 고정 & 텍스트 꽉 찬 줄글 형태로 다듬기 */
+/* 🌸 3. 환영 인사(교회 소개) 모바일 레이아웃 수정 */
     .welcome-container-flex {
-        flex-direction: row; /* 사진-텍스트 좌우 배치 유지 */
-        align-items: flex-start; /* 위쪽 선을 기준으로 깔끔하게 정렬 */
-        padding: 25px 15px; 
-        margin: 20px 10px;
-        gap: 15px; 
+        flex-direction: row; /* 사진과 글을 다시 양옆으로 나란히 배치 */
+        align-items: stretch; /* ★ 양쪽 상자의 높이를 똑같이 맞춤 */
+        padding: 30px 15px;
+        margin: 20px 15px;
+        gap: 15px;
     }
+
     .pastor-photo {
-        flex-shrink: 0; /* 사진 찌그러짐 철벽 방어 */
+        display: flex; /* 사진 영역을 텍스트 높이만큼 늘리기 위한 설정 */
     }
+
     .pastor-photo img {
-        width: 100px; /* 텍스트 공간 확보를 위해 사진 너비를 살짝만 더 줄임 */
-        height: 140px;
+        width: 140px; /* 사진 너비를 시원하게 키움 */
+        height: 100%; /* ★ 텍스트 높이에 맞춰 세로로 꽉 차게 늘림! */
+        min-height: 230px; /* 글씨가 적어도 사진이 너무 작아지지 않게 방어 */
         object-fit: cover;
+        border-radius: 15px;
+        flex-shrink: 0;
     }
+
     .welcome-text {
-        text-align: left; 
+        text-align: left; /* 본문은 왼쪽 정렬 */
+        flex: 1;
+        display: flex;
+        flex-direction: column; /* 글씨 박스 안에서 위아래 공간을 나누기 위해 추가 */
     }
+
     .welcome-text h2 {
-        font-size: 1.05em; 
-        font-weight: 900; 
-        letter-spacing: -0.5px;
-        word-break: keep-all; /* 제목은 듬성듬성해도 단어가 유지되는 게 예쁩니다 */
-        white-space: normal;
-        margin-top: 0; 
+        font-size: 1.15em;
+        font-weight: 900;
+        letter-spacing: -1px;
+        word-break: keep-all;
+        margin-top: 0;
         margin-bottom: 10px;
     }
+
     .welcome-text p {
-        font-size: 0.85em; /* 폰 화면에 맞춰 글씨를 살짝 줄임 */
+        font-size: 0.95em;
         line-height: 1.6;
         margin-bottom: 15px;
-        word-break: break-all; /* ★ 핵심 1: 좁은 공간에서도 글자가 빈틈없이 꽉 채워지게 줄바꿈 허용 */
-        text-align: justify; /* ★ 핵심 2: 텍스트 박스 양쪽 끝을 반듯하게 정렬해서 깔끔함 극대화 */
     }
+
     .pastor-name {
-        font-size: 0.85em;
-        text-align: right;
+        text-align: right; /* ★ 목사님 성함만 오른쪽 정렬! */
+        margin-top: auto; /* ★ 위쪽 빈 공간을 밀어내서 글씨를 상자 맨 아래 우측으로 착 붙임 */
+        margin-bottom: 0;
+        font-weight: bold;
     }
 
     /* 4. 말씀 카드 디자인 조절 */
