@@ -600,23 +600,22 @@ html, body {
         line-height: 1.6;
     }
 
-  /* 5. 모바일 갤러리 (양 끝 짤림 완벽 해결) */
+ /* 🌸 5. 모바일 갤러리 (사진 크기 축소 & 1:1 정방형 비율) */
     .slider-btn { display: none; } 
     
     .photo-grid-slider {
         overflow-x: auto; 
         scroll-snap-type: x mandatory; 
-        scroll-padding-left: 20px; /* ★ 사진이 왼쪽에 붙을 때 살짝 여백을 줌 */
+        scroll-padding-left: 20px; /* 왼쪽 여백 기준점 */
         transform: none !important; 
-        padding: 0 20px 20px 20px; /* ★ 갤러리 전체 양옆 빈 공간 확보 */
+        padding: 0 20px 20px 20px; /* 갤러리 전체 양옆 빈 공간 */
         -webkit-overflow-scrolling: touch;
     }
     
-    /* ★ 핵심 마법: 마지막 사진 뒤에 투명한 빈 공간을 만들어서 끝까지 스크롤 되게 함 */
     .photo-grid-slider::after {
         content: "";
         flex: 0 0 1px; 
-        padding-right: 20px; 
+        padding-right: 20px; /* 마지막 사진 잘림 방지용 투명 여백 */
     }
 
     .photo-grid-slider::-webkit-scrollbar {
@@ -624,10 +623,10 @@ html, body {
     }
     
     .photo-item {
-        flex: 0 0 55%; /* 화면에 1장 반 정도 보이게 해서 옆으로 넘기는 힌트 주기 */
+        flex: 0 0 42%; /* ★ 너비를 42%로 줄여서 사진을 아담하게 만듦 (화면에 2장 반 정도 보임) */
         height: auto; 
-        aspect-ratio: 1 / 1; 
-        scroll-snap-align: start; /* ★ 중앙이 아니라 '왼쪽'을 기준으로 자석처럼 착! 붙게 변경 */
+        aspect-ratio: 1 / 1; /* ★ 완벽한 1:1 정사각형 비율 유지 */
+        scroll-snap-align: start; 
     }
     </style>
 </head>
