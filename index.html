@@ -533,20 +533,20 @@ html, body {
         display: none; 
     }
     
-    /* 🌸 3. 환영 인사 모바일에서 '좌우 배치' 유지 & 사진 찌그러짐 방어! */
+ /* 🌸 3. 환영 인사 모바일: 사진 고정 & 텍스트 꽉 찬 줄글 형태로 다듬기 */
     .welcome-container-flex {
         flex-direction: row; /* 사진-텍스트 좌우 배치 유지 */
-        align-items: flex-start; 
+        align-items: flex-start; /* 위쪽 선을 기준으로 깔끔하게 정렬 */
         padding: 25px 15px; 
         margin: 20px 10px;
         gap: 15px; 
     }
     .pastor-photo {
-        flex-shrink: 0; /* 사진 찌그러짐 철벽 방어! */
+        flex-shrink: 0; /* 사진 찌그러짐 철벽 방어 */
     }
     .pastor-photo img {
-        width: 110px; /* 폰 화면에 맞게 사진 너비 축소 */
-        height: 150px;
+        width: 100px; /* 텍스트 공간 확보를 위해 사진 너비를 살짝만 더 줄임 */
+        height: 140px;
         object-fit: cover;
     }
     .welcome-text {
@@ -556,18 +556,21 @@ html, body {
         font-size: 1.05em; 
         font-weight: 900; 
         letter-spacing: -0.5px;
-        word-break: keep-all; 
-        white-space: normal; /* 한 줄 고정 해제 */
+        word-break: keep-all; /* 제목은 듬성듬성해도 단어가 유지되는 게 예쁩니다 */
+        white-space: normal;
         margin-top: 0; 
+        margin-bottom: 10px;
     }
     .welcome-text p {
-        font-size: 0.9em; 
+        font-size: 0.85em; /* 폰 화면에 맞춰 글씨를 살짝 줄임 */
         line-height: 1.6;
         margin-bottom: 15px;
-        word-break: keep-all; /* 단어 잘림 방지 */
+        word-break: break-all; /* ★ 핵심 1: 좁은 공간에서도 글자가 빈틈없이 꽉 채워지게 줄바꿈 허용 */
+        text-align: justify; /* ★ 핵심 2: 텍스트 박스 양쪽 끝을 반듯하게 정렬해서 깔끔함 극대화 */
     }
     .pastor-name {
-        font-size: 0.9em;
+        font-size: 0.85em;
+        text-align: right;
     }
 
     /* 4. 말씀 카드 디자인 조절 */
