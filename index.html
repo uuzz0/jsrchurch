@@ -14,6 +14,22 @@
         font-style: italic;
         letter-spacing: 0.5px;
     }     
+        /* 기존 html, body 설정에 아래 내용을 추가/수정하세요 */
+* {
+    box-sizing: border-box; /* 패딩이 너비를 초과하지 않게 방어 */
+}
+
+html, body {
+    overflow-x: hidden; /* ★중요: 가로 스크롤 완전 차단 (화면 고정) */
+    width: 100%;
+    /* 기존 코드 유지... */
+    scroll-behavior: smooth;
+    background-color: #fdfaf5; 
+    color: #5a4a42;
+    font-family: 'Malgun Gothic', sans-serif;
+    margin: 0;
+    padding: 0;
+}
    /* 1. 기본 배경과 폰트 설정 */
         html {
             scroll-behavior: smooth; /* 부드러운 화면 이동 */
@@ -503,56 +519,59 @@
 }
 /* 📱 모바일 전용 스타일 (화면 너비 768px 이하일 때만 작동) */
 @media (max-width: 768px) {
-    /* 1. 메뉴 여백과 폰트 크기 조절 */
+    /* 1. 메뉴 조절 */
     nav ul {
         gap: 15px; 
         flex-wrap: wrap; 
     }
-    nav a {
-        font-size: 1em; 
-    }
+    nav a { font-size: 1em; }
 
-    /* 🌸 2. 환영 인사(교회 소개) 찌그러짐 해결 */
+    /* 2. 텍스트 예쁘게 다듬기 (문장 잘림 방지) */
+    .welcome-text p br, .bible-verse h2 br {
+        display: none; /* PC용 줄바꿈(<br>)을 모바일에서는 무시! */
+    }
+    .welcome-text h2, .welcome-text p, .bible-verse h2 {
+        word-break: keep-all; /* 단어가 중간에 쪼개지지 않게 보호 */
+        line-height: 1.6;
+    }
+    
+    /* 3. 환영 인사 여백 조절 */
     .welcome-container-flex {
-        padding: 30px 15px; /* 좌우 여백을 확 줄여서 텍스트 공간 넓히기! */
+        padding: 30px 20px; 
         margin: 20px 15px;
         gap: 20px;
     }
-    .welcome-text h2, .welcome-text p {
-        word-break: keep-all; /* 글씨가 어색하게 중간에 안 끊어지게(단어 단위로 줄바꿈) */
-    }
 
-    /* 3. 말씀 카드 디자인 조절 */
+    /* 4. 말씀 카드 디자인 조절 */
     .bible-verse {
-        padding: 50px 20px; 
-        margin: 20px;
+        padding: 40px 20px; 
+        margin: 20px 15px;
     }
     .bible-verse::before {
-        font-size: 3em; 
-        letter-spacing: 5px;
+        font-size: 2.5em; /* 모바일에서 텍스트 배경 더 작게 */
+        letter-spacing: 3px;
     }
-    .bible-verse h2 {
-        font-size: 1.3em; 
-    }
+    .bible-verse h2 { font-size: 1.25em; }
 
-    /* 🌸 4. 모바일 갤러리를 손가락 스와이프 방식으로 변경! */
-    .slider-btn {
-        display: none; /* 누르기 힘든 화살표는 폰에서 숨김 */
-    }
+    /* 5. 모바일 갤러리 (세로가 긴 4:5 비율 적용) */
+    .slider-btn { display: none; } /* 화살표 숨김 */
+    
     .photo-grid-slider {
-        overflow-x: auto; /* 손가락으로 밀어볼 수 있게 활성화 */
-        scroll-snap-type: x mandatory; /* 넘길 때 자석처럼 화면에 착착 붙는 효과 */
-        transform: none !important; /* PC용 화살표 움직임 기능은 강제 정지 */
-        padding-bottom: 10px;
-        -webkit-overflow-scrolling: touch; /* 아이폰에서 부드럽게 스크롤되게 */
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory; 
+        transform: none !important; 
+        padding-bottom: 15px;
+        -webkit-overflow-scrolling: touch;
     }
     .photo-grid-slider::-webkit-scrollbar {
-        display: none; /* 지저분한 스크롤바 선 숨기기 */
+        display: none; 
     }
+    
     .photo-item {
-        flex: 0 0 85%; /* 사진 한 장이 폰 화면의 85%를 꽉 채움 (다음 사진이 살짝 보이게 힌트) */
-        height: 250px;
-        scroll-snap-align: center; /* 사진이 무조건 화면 가운데로 자석처럼 붙음 */
+        flex: 0 0 75%; /* 화면의 75% 너비 차지 */
+        height: auto; 
+        aspect-ratio: 4 / 5; /* 4:5 비율 (정방형을 원하면 1 / 1 로 변경) */
+        scroll-snap-align: center; 
     }
 }
     </style>
