@@ -257,12 +257,13 @@ html, body {
             margin: 10px 0;
         }
 
-        .welcome-text p {
-            color: #7a6a62;
-            line-height: 1.8;
-            font-size: 1.05em;
-            margin-bottom: 20px;
-        }
+       .welcome-text p {
+    color: #7a6a62;
+    line-height: 1.8;
+    font-size: 1.05em;
+    margin-bottom: 20px;
+    word-break: keep-all; /* ★ 이 줄을 추가하면 단어가 중간에 끊기지 않습니다! */
+}
 
         .pastor-name {
             font-size: 1.1em;
@@ -568,9 +569,9 @@ html, body {
     }
     
     .photo-item {
-        flex: 0 0 75%; /* 화면의 75% 너비 차지 */
+        flex: 0 0 50%; /* ★ 75%에서 50%로 줄여서 화면에 사진이 2장씩 앙증맞게 보이도록 변경 */
         height: auto; 
-        aspect-ratio: 4 / 5; /* 4:5 비율 (정방형을 원하면 1 / 1 로 변경) */
+        aspect-ratio: 1 / 1; /* ★ 4/5 (세로형)에서 1/1 (정사각형)으로 변경해 세로 길이를 줄임 */
         scroll-snap-align: center; 
     }
 }
