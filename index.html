@@ -501,35 +501,58 @@
     max-height: 85%;
     border: 3px solid white;
 }
-        /* 📱 모바일 전용 스타일 (화면 너비 768px 이하일 때만 작동) */
+/* 📱 모바일 전용 스타일 (화면 너비 768px 이하일 때만 작동) */
 @media (max-width: 768px) {
     /* 1. 메뉴 여백과 폰트 크기 조절 */
     nav ul {
-        gap: 15px; /* 메뉴 사이 간격을 좁혀서 한 줄에 들어오게 */
-        flex-wrap: wrap; /* 자리가 부족하면 아랫줄로 넘어가게 */
+        gap: 15px; 
+        flex-wrap: wrap; 
     }
     nav a {
-        font-size: 1em; /* 모바일에서는 살짝만 작게 */
+        font-size: 1em; 
     }
 
-    /* 2. 말씀 카드 디자인 조절 */
+    /* 🌸 2. 환영 인사(교회 소개) 찌그러짐 해결 */
+    .welcome-container-flex {
+        padding: 30px 15px; /* 좌우 여백을 확 줄여서 텍스트 공간 넓히기! */
+        margin: 20px 15px;
+        gap: 20px;
+    }
+    .welcome-text h2, .welcome-text p {
+        word-break: keep-all; /* 글씨가 어색하게 중간에 안 끊어지게(단어 단위로 줄바꿈) */
+    }
+
+    /* 3. 말씀 카드 디자인 조절 */
     .bible-verse {
-        padding: 50px 20px; /* 모바일에서는 좌우 여백을 줄여서 공간 확보 */
+        padding: 50px 20px; 
         margin: 20px;
     }
     .bible-verse::before {
-        font-size: 3em; /* 배경의 큰 영어 글씨를 확 줄임 */
+        font-size: 3em; 
         letter-spacing: 5px;
     }
     .bible-verse h2 {
-        font-size: 1.3em; /* 말씀 글씨 크기를 모바일에 맞게 조절 */
+        font-size: 1.3em; 
     }
 
-    /* 3. 갤러리 슬라이더 화살표 크기 조절 */
+    /* 🌸 4. 모바일 갤러리를 손가락 스와이프 방식으로 변경! */
     .slider-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
+        display: none; /* 누르기 힘든 화살표는 폰에서 숨김 */
+    }
+    .photo-grid-slider {
+        overflow-x: auto; /* 손가락으로 밀어볼 수 있게 활성화 */
+        scroll-snap-type: x mandatory; /* 넘길 때 자석처럼 화면에 착착 붙는 효과 */
+        transform: none !important; /* PC용 화살표 움직임 기능은 강제 정지 */
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch; /* 아이폰에서 부드럽게 스크롤되게 */
+    }
+    .photo-grid-slider::-webkit-scrollbar {
+        display: none; /* 지저분한 스크롤바 선 숨기기 */
+    }
+    .photo-item {
+        flex: 0 0 85%; /* 사진 한 장이 폰 화면의 85%를 꽉 채움 (다음 사진이 살짝 보이게 힌트) */
+        height: 250px;
+        scroll-snap-align: center; /* 사진이 무조건 화면 가운데로 자석처럼 붙음 */
     }
 }
     </style>
