@@ -432,22 +432,21 @@
 }
      /* --- 갤러리 슬라이더 관련 --- */
 .gallery-wrapper {
-    position: relative;
+    position: relative; /* 버튼 배치의 기준점 */
     max-width: 1000px;
     margin: 0 auto;
-    overflow: hidden; /* 영역 밖 사진 숨김 */
+    overflow: hidden; /* 넘치는 사진 숨기기 */
 }
 
 .photo-grid-slider {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    gap: 20px;
-    padding: 10px;
+    transition: transform 0.5s ease; /* 이동 애니메이션 */
+    gap: 15px;
 }
 
 .photo-item {
-    min-width: 280px; /* 슬라이드 한 칸의 너비 */
-    cursor: pointer;
+    flex: 0 0 300px; /* 사진 너비 300px 고정 */
+    height: 300px;
 }
 
 /* 슬라이더 화살표 */
@@ -587,13 +586,15 @@
         </div>
     </section>
 
-    <section id="gallery">
+  <section id="gallery">
     <div class="gallery-container reveal">
         <h2>주성령 갤러리</h2>
         <div class="gallery-wrapper">
+            <!-- 1. 이전 버튼 -->
             <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
+            
+            <!-- 2. 슬라이더 본체 -->
             <div class="photo-grid-slider" id="slider">
-                <!-- 사진들을 마음껏 추가하세요! -->
                 <div class="photo-item"><img src="cele.jpg" alt="사진 1" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="gathering.jpg" alt="사진 2" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="mission.jpg" alt="사진 3" onclick="openLightbox(this.src)"></div>
@@ -605,10 +606,11 @@
                 <div class="photo-item"><img src="outing2.jpg" alt="사진 9" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="cele2025.jpg" alt="사진 10" onclick="openLightbox(this.src)"></div>
             </div>
-            </div>
+
+            <!-- 3. 다음 버튼 (여기에 있던 불필요한 </div>를 제거하고 버튼을 위로 올렸습니다) -->
             <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
-        </div>
-    </div>
+        </div> <!-- .gallery-wrapper 닫기 -->
+    </div> <!-- .gallery-container 닫기 -->
 </section>
 
 <!-- 라이트박스 구조 (body 하단에 추가) -->
@@ -693,22 +695,24 @@ document.getElementById('current-date').innerText = dateString;
     const revealElements = document.querySelectorAll('.reveal, .reveal-left');
     revealElements.forEach(el => observer.observe(el));
             /* 슬라이더 제어 */
-let currentIdx = 0;
+let currentPosition = 0;
+
 function moveSlider(direction) {
     const slider = document.getElementById('slider');
-    const items = document.querySelectorAll('.photo-item');
-    const itemWidth = items[0].offsetWidth + 20; // 너비 + gap
-    const maxIdx = items.length - 1;
+    const containerWidth = document.querySelector('.gallery-wrapper').offsetWidth;
+    const sliderWidth = slider.scrollWidth;
+    const step = 315; // 사진 너비(300) + 간격(15)
 
-    currentIdx += direction;
+    currentPosition -= (direction * step);
 
-    // 끝에 도달하면 처음으로, 처음에서 뒤로가면 끝으로 (무한루프형)
-    if (currentIdx < 0) currentIdx = 0;
-    if (currentIdx > maxIdx - 2) currentIdx = maxIdx - 2; // 한 화면에 3개 보일 기준
+    // 무한으로 나가지 않게 범위 제한
+    if (currentPosition > 0) currentPosition = 0;
+    if (Math.abs(currentPosition) > (sliderWidth - containerWidth)) {
+        currentPosition = -(sliderWidth - containerWidth);
+    }
 
-    slider.style.transform = `translateX(-${currentIdx * itemWidth}px)`;
+    slider.style.transform = `translateX(${currentPosition}px)`;
 }
-
 /* 라이트박스 제어 */
 function openLightbox(src) {
     const lightbox = document.getElementById('lightbox');
