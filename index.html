@@ -430,6 +430,76 @@
     opacity: 1;
     transform: translateX(0);
 }
+     /* --- 갤러리 슬라이더 관련 --- */
+.gallery-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden; /* 영역 밖 사진 숨김 */
+}
+
+.photo-grid-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    padding: 10px;
+}
+
+.photo-item {
+    min-width: 280px; /* 슬라이드 한 칸의 너비 */
+    cursor: pointer;
+}
+
+/* 슬라이더 화살표 */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    color: #8c6a5e;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+.slider-btn:hover { background: #8c6a5e; color: #fff; }
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* --- 라이트박스 (확대창) --- */
+#lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}   
     </style>
 </head>
 <body>
@@ -518,15 +588,34 @@
     </section>
 
     <section id="gallery">
-        <div class="gallery-container">
-            <h2>주성령 갤러리</h2>
-            <div class="photo-grid">
-    <div class="photo-item reveal" style="transition-delay: 0.1s;"><img src="cele2025.jpg"></div>
-    <div class="photo-item reveal" style="transition-delay: 0.3s;"><img src="gathering.jpg"></div>
-    <div class="photo-item reveal" style="transition-delay: 0.5s;"><img src="mission.jpg"></div>
-</div>
+    <div class="gallery-container reveal">
+        <h2>주성령 갤러리</h2>
+        <div class="gallery-wrapper">
+            <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
+            <div class="photo-grid-slider" id="slider">
+                <!-- 사진들을 마음껏 추가하세요! -->
+                <div class="photo-item"><img src="cele.jpg" alt="사진 1" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="gathering.jpg" alt="사진 2" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission.jpg" alt="사진 3" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="summer outing.jpg" alt="사진 4" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="hbd.jpg" alt="사진 5" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="game.jpg" alt="사진 6" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission2.jpg" alt="사진 7" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission3.jpg" alt="사진 8" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="outing2.jpg" alt="사진 9" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="cele2025.jpg" alt="사진 10" onclick="openLightbox(this.src)"></div>
+            </div>
+            </div>
+            <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- 라이트박스 구조 (body 하단에 추가) -->
+<div id="lightbox" onclick="this.style.display='none'">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="" alt="확대 이미지">
+</div>
 
    <section id="location">
     <h3>⛪ 오시는 길</h3> 
@@ -603,6 +692,31 @@ document.getElementById('current-date').innerText = dateString;
     // .reveal 클래스를 가진 모든 요소를 감시 대상으로 등록
     const revealElements = document.querySelectorAll('.reveal, .reveal-left');
     revealElements.forEach(el => observer.observe(el));
+            /* 슬라이더 제어 */
+let currentIdx = 0;
+function moveSlider(direction) {
+    const slider = document.getElementById('slider');
+    const items = document.querySelectorAll('.photo-item');
+    const itemWidth = items[0].offsetWidth + 20; // 너비 + gap
+    const maxIdx = items.length - 1;
+
+    currentIdx += direction;
+
+    // 끝에 도달하면 처음으로, 처음에서 뒤로가면 끝으로 (무한루프형)
+    if (currentIdx < 0) currentIdx = 0;
+    if (currentIdx > maxIdx - 2) currentIdx = maxIdx - 2; // 한 화면에 3개 보일 기준
+
+    slider.style.transform = `translateX(-${currentIdx * itemWidth}px)`;
+}
+
+/* 라이트박스 제어 */
+function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+}
 });
     </script>
 </body>
