@@ -535,31 +535,32 @@ html, body {
     
 /* 🌸 3. 환영 인사(교회 소개) 모바일 레이아웃 수정 */
     .welcome-container-flex {
-        flex-direction: row; /* 사진과 글을 다시 양옆으로 나란히 배치 */
-        align-items: stretch; /* ★ 양쪽 상자의 높이를 똑같이 맞춤 */
+        flex-direction: row; 
+        align-items: stretch; /* 글씨 박스가 위아래로 꽉 차게 유지 */
         padding: 30px 15px;
         margin: 20px 15px;
         gap: 15px;
     }
 
     .pastor-photo {
-        display: flex; /* 사진 영역을 텍스트 높이만큼 늘리기 위한 설정 */
+        display: flex; 
+        align-items: flex-start; /* 사진이 억지로 세로로 길게 늘어나는 것 방지 */
     }
 
     .pastor-photo img {
-        width: 140px; /* 사진 너비를 시원하게 키움 */
-        height: 100%; /* ★ 텍스트 높이에 맞춰 세로로 꽉 차게 늘림! */
-        min-height: 230px; /* 글씨가 적어도 사진이 너무 작아지지 않게 방어 */
+        width: 135px; /* 시원하게 잘 보이는 너비 */
+        height: auto; /* 높이는 자동으로 설정해서 찌그러짐 방지 */
+        aspect-ratio: 22 / 28; /* ★ 핵심: PC 버전과 완벽하게 똑같은 비율 (220:280) 적용! */
         object-fit: cover;
         border-radius: 15px;
         flex-shrink: 0;
     }
 
     .welcome-text {
-        text-align: left; /* 본문은 왼쪽 정렬 */
+        text-align: left; 
         flex: 1;
         display: flex;
-        flex-direction: column; /* 글씨 박스 안에서 위아래 공간을 나누기 위해 추가 */
+        flex-direction: column; 
     }
 
     .welcome-text h2 {
@@ -578,8 +579,8 @@ html, body {
     }
 
     .pastor-name {
-        text-align: right; /* ★ 목사님 성함만 오른쪽 정렬! */
-        margin-top: auto; /* ★ 위쪽 빈 공간을 밀어내서 글씨를 상자 맨 아래 우측으로 착 붙임 */
+        text-align: right; /* 목사님 성함 오른쪽 정렬 */
+        margin-top: auto; /* 빈 공간을 밀어내서 맨 아래 우측으로 고정 */
         margin-bottom: 0;
         font-weight: bold;
     }
@@ -599,27 +600,35 @@ html, body {
         line-height: 1.6;
     }
 
-    /* 5. 모바일 갤러리 (정사각형 1:1 비율 적용) */
+  /* 5. 모바일 갤러리 (양 끝 짤림 완벽 해결) */
     .slider-btn { display: none; } 
     
     .photo-grid-slider {
         overflow-x: auto; 
         scroll-snap-type: x mandatory; 
+        scroll-padding-left: 20px; /* ★ 사진이 왼쪽에 붙을 때 살짝 여백을 줌 */
         transform: none !important; 
-        padding-bottom: 15px;
+        padding: 0 20px 20px 20px; /* ★ 갤러리 전체 양옆 빈 공간 확보 */
         -webkit-overflow-scrolling: touch;
     }
+    
+    /* ★ 핵심 마법: 마지막 사진 뒤에 투명한 빈 공간을 만들어서 끝까지 스크롤 되게 함 */
+    .photo-grid-slider::after {
+        content: "";
+        flex: 0 0 1px; 
+        padding-right: 20px; 
+    }
+
     .photo-grid-slider::-webkit-scrollbar {
         display: none; 
     }
     
     .photo-item {
-        flex: 0 0 50%; /* 화면에 2장씩 보이게 */
+        flex: 0 0 55%; /* 화면에 1장 반 정도 보이게 해서 옆으로 넘기는 힌트 주기 */
         height: auto; 
-        aspect-ratio: 1 / 1; /* 정사각형 비율 */
-        scroll-snap-align: center; 
+        aspect-ratio: 1 / 1; 
+        scroll-snap-align: start; /* ★ 중앙이 아니라 '왼쪽'을 기준으로 자석처럼 착! 붙게 변경 */
     }
-}
     </style>
 </head>
 <body>
