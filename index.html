@@ -430,75 +430,75 @@
     opacity: 1;
     transform: translateX(0);
 }
-     /* --- 갤러리 슬라이더 관련 --- */
+/* 갤러리 감싸는 전체 박스 */
 .gallery-wrapper {
-    position: relative; /* 버튼 배치의 기준점 */
-    max-width: 1000px;
+    position: relative;
+    max-width: 1000px; /* 화면에 보여줄 전체 너비 */
     margin: 0 auto;
-    overflow: hidden; /* 넘치는 사진 숨기기 */
+    overflow: hidden; /* ★중요: 삐져나온 사진 숨기기 */
+    padding: 20px 0;
 }
 
+/* 사진들이 한 줄로 기차처럼 서 있는 곳 */
 .photo-grid-slider {
     display: flex;
-    transition: transform 0.5s ease; /* 이동 애니메이션 */
-    gap: 15px;
+    transition: transform 0.5s ease-in-out; /* 부드럽게 움직이는 마법 */
+    gap: 20px; /* 사진 사이 간격 */
+    padding: 0 10px;
 }
 
+/* 사진 한 장당 설정 */
 .photo-item {
-    flex: 0 0 300px; /* 사진 너비 300px 고정 */
-    height: 300px;
+    flex: 0 0 280px; /* ★중요: 사진 크기를 280px로 고정 */
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* 슬라이더 화살표 */
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 화살표 버튼 디자인 */
 .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    color: #8c6a5e;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     font-size: 20px;
-    transition: all 0.3s;
+    color: #8c6a5e;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+.prev-btn { left: 5px; }
+.next-btn { right: 5px; }
 
-.slider-btn:hover { background: #8c6a5e; color: #fff; }
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
-
-/* --- 라이트박스 (확대창) --- */
+/* 라이트박스(확대창) 디자인 */
 #lightbox {
-    display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 1000;
+    background: rgba(0,0,0,0.85);
+    display: none; /* 처음엔 숨김 */
     justify-content: center;
     align-items: center;
-    cursor: zoom-out;
+    z-index: 9999;
+    cursor: pointer;
 }
-
 #lightbox img {
     max-width: 90%;
-    max-height: 80%;
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    max-height: 85%;
+    border: 3px solid white;
 }
-
-.close-lightbox {
-    position: absolute;
-    top: 30px; right: 40px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}   
     </style>
 </head>
 <body>
@@ -586,37 +586,36 @@
         </div>
     </section>
 
-  <section id="gallery">
-    <div class="gallery-container reveal">
+<section id="gallery">
+    <div class="gallery-container">
         <h2>주성령 갤러리</h2>
         <div class="gallery-wrapper">
-            <!-- 1. 이전 버튼 -->
+            <!-- 왼쪽 버튼 -->
             <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
             
-            <!-- 2. 슬라이더 본체 -->
+            <!-- 사진 기차 -->
             <div class="photo-grid-slider" id="slider">
-                <div class="photo-item"><img src="cele.jpg" alt="사진 1" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="gathering.jpg" alt="사진 2" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="mission.jpg" alt="사진 3" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="summer outing.jpg" alt="사진 4" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="hbd.jpg" alt="사진 5" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="game.jpg" alt="사진 6" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="mission2.jpg" alt="사진 7" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="mission3.jpg" alt="사진 8" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="outing2.jpg" alt="사진 9" onclick="openLightbox(this.src)"></div>
-                <div class="photo-item"><img src="cele2025.jpg" alt="사진 10" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="cele.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="gathering.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="summer outing.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="hbd.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="game.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission2.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="mission3.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="outing2.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="cele2025.jpg" onclick="openLightbox(this.src)"></div>
             </div>
 
-            <!-- 3. 다음 버튼 (여기에 있던 불필요한 </div>를 제거하고 버튼을 위로 올렸습니다) -->
+            <!-- 오른쪽 버튼 -->
             <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
-        </div> <!-- .gallery-wrapper 닫기 -->
-    </div> <!-- .gallery-container 닫기 -->
+        </div>
+    </div>
 </section>
 
-<!-- 라이트박스 구조 (body 하단에 추가) -->
+<!-- 라이트박스 창 (body 태그 닫히기 직전에 넣어주세요) -->
 <div id="lightbox" onclick="this.style.display='none'">
-    <span class="close-lightbox">&times;</span>
-    <img id="lightbox-img" src="" alt="확대 이미지">
+    <img id="lightbox-img" src="">
 </div>
 
    <section id="location">
@@ -695,33 +694,36 @@ document.getElementById('current-date').innerText = dateString;
     const revealElements = document.querySelectorAll('.reveal, .reveal-left');
     revealElements.forEach(el => observer.observe(el));
             /* 슬라이더 제어 */
-let currentPosition = 0;
+let currentIdx = 0; // 현재 몇 번째 사진을 보고 있는지
 
 function moveSlider(direction) {
     const slider = document.getElementById('slider');
-    const containerWidth = document.querySelector('.gallery-wrapper').offsetWidth;
-    const sliderWidth = slider.scrollWidth;
-    const step = 315; // 사진 너비(300) + 간격(15)
+    const items = document.querySelectorAll('.photo-item');
+    const totalItems = items.length;
+    
+    // 사진 한 장 너비(280) + 간격(20) = 300px씩 이동
+    const moveSize = 300; 
+    
+    // 현재 인덱스 업데이트
+    currentIdx += direction;
 
-    currentPosition -= (direction * step);
+    // 끝 범위 제한 (사진이 10장이면 최대 7번만 넘어가도록 설정 - 화면 너비에 따라 다름)
+    const maxIdx = totalItems - 3; // 한 화면에 3개 보일 때 기준
+    if (currentIdx < 0) currentIdx = 0;
+    if (currentIdx > maxIdx) currentIdx = maxIdx;
 
-    // 무한으로 나가지 않게 범위 제한
-    if (currentPosition > 0) currentPosition = 0;
-    if (Math.abs(currentPosition) > (sliderWidth - containerWidth)) {
-        currentPosition = -(sliderWidth - containerWidth);
-    }
-
-    slider.style.transform = `translateX(${currentPosition}px)`;
+    // 실제로 밀어버리는 코드!
+    slider.style.transform = `translateX(-${currentIdx * moveSize}px)`;
 }
-/* 라이트박스 제어 */
-function openLightbox(src) {
+
+// 라이트박스 열기 함수
+function openLightbox(imageSrc) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     
-    lightboxImg.src = src;
+    lightboxImg.src = imageSrc;
     lightbox.style.display = 'flex';
 }
-});
     </script>
 </body>
 </html>
