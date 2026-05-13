@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 이 줄을 꼭 추가하세요! -->
     <title>주성령교회 - 인내의 말씀을 지키는 교회</title>
     <style>
 /* 실시간 날짜 디자인 */
@@ -498,6 +500,37 @@
     max-width: 90%;
     max-height: 85%;
     border: 3px solid white;
+}
+        /* 📱 모바일 전용 스타일 (화면 너비 768px 이하일 때만 작동) */
+@media (max-width: 768px) {
+    /* 1. 메뉴 여백과 폰트 크기 조절 */
+    nav ul {
+        gap: 15px; /* 메뉴 사이 간격을 좁혀서 한 줄에 들어오게 */
+        flex-wrap: wrap; /* 자리가 부족하면 아랫줄로 넘어가게 */
+    }
+    nav a {
+        font-size: 1em; /* 모바일에서는 살짝만 작게 */
+    }
+
+    /* 2. 말씀 카드 디자인 조절 */
+    .bible-verse {
+        padding: 50px 20px; /* 모바일에서는 좌우 여백을 줄여서 공간 확보 */
+        margin: 20px;
+    }
+    .bible-verse::before {
+        font-size: 3em; /* 배경의 큰 영어 글씨를 확 줄임 */
+        letter-spacing: 5px;
+    }
+    .bible-verse h2 {
+        font-size: 1.3em; /* 말씀 글씨 크기를 모바일에 맞게 조절 */
+    }
+
+    /* 3. 갤러리 슬라이더 화살표 크기 조절 */
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
 }
     </style>
 </head>
