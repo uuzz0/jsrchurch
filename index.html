@@ -528,20 +528,46 @@ html, body {
     }
     nav a { font-size: 1em; }
 
-    /* 2. 텍스트 예쁘게 다듬기 (문장 잘림 방지) */
+    /* 2. 텍스트 예쁘게 다듬기 (PC용 줄바꿈 무시) */
     .welcome-text p br, .bible-verse h2 br {
-        display: none; /* PC용 줄바꿈(<br>)을 모바일에서는 무시! */
-    }
-    .welcome-text h2, .welcome-text p, .bible-verse h2 {
-        word-break: keep-all; /* 단어가 중간에 쪼개지지 않게 보호 */
-        line-height: 1.6;
+        display: none; 
     }
     
-    /* 3. 환영 인사 여백 조절 */
+    /* 🌸 3. 환영 인사 모바일에서 '좌우 배치' 유지 & 사진 찌그러짐 방어! */
     .welcome-container-flex {
-        padding: 30px 20px; 
-        margin: 20px 15px;
-        gap: 20px;
+        flex-direction: row; /* 사진-텍스트 좌우 배치 유지 */
+        align-items: flex-start; 
+        padding: 25px 15px; 
+        margin: 20px 10px;
+        gap: 15px; 
+    }
+    .pastor-photo {
+        flex-shrink: 0; /* 사진 찌그러짐 철벽 방어! */
+    }
+    .pastor-photo img {
+        width: 110px; /* 폰 화면에 맞게 사진 너비 축소 */
+        height: 150px;
+        object-fit: cover;
+    }
+    .welcome-text {
+        text-align: left; 
+    }
+    .welcome-text h2 {
+        font-size: 1.05em; 
+        font-weight: 900; 
+        letter-spacing: -0.5px;
+        word-break: keep-all; 
+        white-space: normal; /* 한 줄 고정 해제 */
+        margin-top: 0; 
+    }
+    .welcome-text p {
+        font-size: 0.9em; 
+        line-height: 1.6;
+        margin-bottom: 15px;
+        word-break: keep-all; /* 단어 잘림 방지 */
+    }
+    .pastor-name {
+        font-size: 0.9em;
     }
 
     /* 4. 말씀 카드 디자인 조절 */
@@ -550,13 +576,17 @@ html, body {
         margin: 20px 15px;
     }
     .bible-verse::before {
-        font-size: 2.5em; /* 모바일에서 텍스트 배경 더 작게 */
+        font-size: 2.5em; 
         letter-spacing: 3px;
     }
-    .bible-verse h2 { font-size: 1.25em; }
+    .bible-verse h2 { 
+        font-size: 1.25em; 
+        word-break: keep-all; 
+        line-height: 1.6;
+    }
 
-    /* 5. 모바일 갤러리 (세로가 긴 4:5 비율 적용) */
-    .slider-btn { display: none; } /* 화살표 숨김 */
+    /* 5. 모바일 갤러리 (정사각형 1:1 비율 적용) */
+    .slider-btn { display: none; } 
     
     .photo-grid-slider {
         overflow-x: auto; 
@@ -570,9 +600,9 @@ html, body {
     }
     
     .photo-item {
-        flex: 0 0 50%; /* ★ 75%에서 50%로 줄여서 화면에 사진이 2장씩 앙증맞게 보이도록 변경 */
+        flex: 0 0 50%; /* 화면에 2장씩 보이게 */
         height: auto; 
-        aspect-ratio: 1 / 1; /* ★ 4/5 (세로형)에서 1/1 (정사각형)으로 변경해 세로 길이를 줄임 */
+        aspect-ratio: 1 / 1; /* 정사각형 비율 */
         scroll-snap-align: center; 
     }
 }
