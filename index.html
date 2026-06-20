@@ -9,6 +9,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 이 줄을 꼭 추가하세요! -->
     <title>주성령교회 - 인내의 말씀을 지키는 교회</title>
     <style>
+        /* ★ [핵심] 다크모드 색상 변수 정의 */
+        :root {
+            --bg-body: #fdfaf5;            /* 일반 라이트 모드 배경 */
+            --bg-card: #ffffff;            /* 일반 카드/테이블 배경 */
+            --bg-welcome: #fff9f9;         /* 일반 환영인사 배경 */
+            --bg-table-th: #f9f5f0;        /* 일반 테이블 헤더 배경 */
+            --text-main: #5a4a42;          /* 일반 메인 글자색 */
+            --text-muted: #a68b80;         /* 일반 서브 글자색 */
+            --text-primary: #8c6a5e;       /* 일반 포인트 글자색 */
+            --accent-color: #d9a78b;       /* 일반 강조색 */
+            --border-color: #f2e8df;       /* 일반 선 색상 */
+            --shadow-color: rgba(140, 106, 94, 0.05);
+            --transition-speed: 0.4s;      /* 모드 전환 부드러운 속도 */
+        }
+
+        /* ★ [핵심] 다크모드가 활성화되었을 때 바뀔 색상들 */
+        [data-theme="dark"] {
+            --bg-body: #1a1513;            /* 어두운 배경 */
+            --bg-card: #2c221e;            /* 어두운 카드 배경 */
+            --bg-welcome: #261e1b;         /* 어두운 환영인사 배경 */
+            --bg-table-th: #3a2e29;        /* 어두운 테이블 헤더 배경 */
+            --text-main: #e6deda;          /* 밝은 메인 글자색 */
+            --text-muted: #bdafa8;         /* 밝은 서브 글자색 */
+            --text-primary: #d9bfa7;       /* 밝은 포인트 글자색 */
+            --accent-color: #e5bfa7;       /* 밝은 강조색 */
+            --border-color: #423530;       /* 어두운 선 색상 */
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        /* 여기서부터 기존에 있던 초기 초기 세팅을 변수로 연결해 줍니다! */
+        * {
+            box-sizing: border-box; 
+        }
+
+        html, body {
+            overflow-x: hidden; 
+            width: 100%;
+            scroll-behavior: smooth;
+            background-color: var(--bg-body); /* 고정 색상 대신 변수 장착! */
+            color: var(--text-main);           /* 고정 색상 대신 변수 장착! */
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
 /* 실시간 날짜 디자인 */
     .date-display {
         color: #a68b80;
